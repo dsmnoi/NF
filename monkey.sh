@@ -17,7 +17,7 @@ UA_Browser="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 function Initialize {
     if [ -f $SESSION ]; then
         echo "Session file found. Terminating..."
-        break
+        exit 0
     else
         echo "" > $SESSION
     fi
@@ -26,7 +26,7 @@ function Initialize {
         Test
     else
         echo "Undefined Mode!"
-        break
+        exit 0
     fi
 }
 
@@ -78,13 +78,15 @@ function Analyse {
         if [[ $COUNT -eq 0 ]]; then
             echo "No error found. Exiting..."
             rm -rf /usr/local/bin/.netflix_session
+            exit 0
         else
             if [[ $DNSmasq -eq 1 ]]; then
                 ChangeDNS
             fi
             SendMsg
-            rm -rf /usr/local/bin/.netflix_session
             echo "Changing IP successed. Exiting..."
+            rm -rf /usr/local/bin/.netflix_session
+            exit 0
         fi
     fi
 }
