@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -11,7 +10,6 @@ API="http://10.192.93.10/changeip/changeip.aspx"
 SYMAPI="https://sym.moe/ddns/ip.php?apikey=apikey&hostname=vmid"
 TG_BOT_TOKEN=1145141919:xxxxxxxxxxxxxxxxxxxxxxxxxxxx
 TG_CHATID=-1145141919810
-
 COUNT=0
 SESSION=/usr/local/bin/.netflix_session
 UA_Browser="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.87 Safari/537.36"
