@@ -72,6 +72,10 @@ function Analyse {
     fi
     echo "Netflix Result: $NetflixResult"
     echo "Google Result: $Google"
+    if [[ $COUNT -eq 0 ]]; then
+        FirstNetflixResult=$NetflixResult
+        FirstGoogle=$Google
+    fi
     if [[ "$Netflix" == "404" ]] || [[ "$Netflix" == "403" ]] || [[ "$Netflix" == "000" ]] || [[ "$Google" == "CN" ]]; then
         ChangeIP
     else
@@ -119,6 +123,8 @@ function ChangeIP {
     elif [[ $MODE -eq 5 ]]; then
         SendMsg
         curl $API > /dev/null 2>&1
+        rm -rf /usr/local/bin/.netflix_session
+        exit 0
     fi
 }
 function ChangeDNS {
@@ -129,7 +135,7 @@ function ChangeDNS {
 
 function SendMsg {
     echo "Sending Telegram Message..."
-    curl -s "https://api.telegram.org/bot$TG_BOT_TOKEN/sendMessage?chat_id=$TG_CHATID&text=%E3%80%90%E7%8C%B4%E5%AD%90+2.1%E3%80%91$NAME+%E4%B9%8B+Netflix%2FGoogle+%E8%A7%A3%E9%8E%96%E5%B7%B2%E5%A4%B1%E6%95%88%EF%BC%8C%E7%9B%AE%E5%89%8D%E5%B7%B2%E5%AE%8C%E6%88%90%E6%9B%B4%E6%8F%9B+IPv4+%E5%9C%B0%E5%9D%80%EF%BC%88Netflix%EF%BC%9A$NetflixResult%EF%BC%8CGoogle%EF%BC%9A$Google%EF%BC%8C%28%E5%B0%9D%E8%AF%95%E6%AC%A1%E6%95%B0%EF%BC%9A$COUNT%EF%BC%89" >/dev/null 2>&1
+    curl -s "https://api.telegram.org/bot$TG_BOT_TOKEN/sendMessage?chat_id=$TG_CHATID&text=%E3%80%90%E7%8C%B4%E5%AD%90+2.1%E3%80%91$NAME+%E4%B9%8B%E8%A7%A3%E9%8E%96%E5%B7%B2%E5%A4%B1%E6%95%88%EF%BC%8C%E7%9B%AE%E5%89%8D%E5%B7%B2%E5%AE%8C%E6%88%90%E6%9B%B4%E6%8F%9B+IPv4+%E5%9C%B0%E5%9D%80%EF%BC%88Netflix%EF%BC%9A$FirstNetflixResult%EF%BC%8CGoogle%EF%BC%9A$FirstGoogle%EF%BC%8C%E5%B0%9D%E8%AF%95%E6%AC%A1%E6%95%B0%EF%BC%9A$COUNT%EF%BC%89" >/dev/null 2>&1
 }
 
 Initialize
