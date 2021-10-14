@@ -90,7 +90,7 @@ function Analyse {
 }
 
 function ChangeIP {
-    echo "Trying to change IP..."
+    echo "Trying to change IP... Count: $COUNT"
     let COUNT++
     if [[ $MODE -eq 1 ]]; then
         dhclient -r -v >/dev/null 2>&1
@@ -126,7 +126,7 @@ function ChangeDNS {
 
 function SendMsg {
     echo "Sending Telegram Message..."
-    curl -s "https://api.telegram.org/bot$TG_BOT_TOKEN/sendMessage?chat_id=$TG_CHATID&text=%E3%80%90%E7%8C%B4%E5%AD%90+2.1%E3%80%91$NAME+%E4%B9%8B+Netflix%2FGoogle+%E8%A7%A3%E9%8E%96%E5%B7%B2%E5%A4%B1%E6%95%88%EF%BC%8C%E7%9B%AE%E5%89%8D%E5%B7%B2%E5%AE%8C%E6%88%90%E6%9B%B4%E6%8F%9B+IPv4+%E5%9C%B0%E5%9D%80" >/dev/null 2>&1
+    curl -s "https://api.telegram.org/bot$TG_BOT_TOKEN/sendMessage?chat_id=$TG_CHATID&text=%E3%80%90%E7%8C%B4%E5%AD%90+2.1%E3%80%91$NAME+%E4%B9%8B+Netflix%2FGoogle+%E8%A7%A3%E9%8E%96%E5%B7%B2%E5%A4%B1%E6%95%88%EF%BC%8C%E7%9B%AE%E5%89%8D%E5%B7%B2%E5%AE%8C%E6%88%90%E6%9B%B4%E6%8F%9B+IPv4+%E5%9C%B0%E5%9D%80%28%E5%B0%9D%E8%AF%95%E6%AC%A1%E6%95%B0%EF%BC%9A$COUNT%EF%BC%89" >/dev/null 2>&1
 }
 
 Initialize
