@@ -107,6 +107,7 @@ function ChangeIP {
     elif [ $MODE -eq 5 ]; then
         SendMsg
         curl $API > /dev/null 2>&1
+    fi
 }
 function ChangeDNS {
     sed -ri "s/\/[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/\/$PresentIP/g" /etc/dnsmasq.d/custom_netflix.conf
