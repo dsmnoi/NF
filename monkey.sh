@@ -122,6 +122,7 @@ function ChangeIP {
     fi
 }
 function ChangeDNS {
+    PresentIP=$(curl -4 -fsL http://ip.sb)
     sed -ri "s/\/[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/\/$PresentIP/g" /etc/dnsmasq.d/custom_netflix.conf
     systemctl restart dnsmasq
 }
