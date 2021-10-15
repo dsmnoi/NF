@@ -1,4 +1,4 @@
-# Automatic Stream Unlock Monitor Monkey
+# Automatic Stream Unlock Monitor Monkey Lite
 
 ## Configurable Options
 
@@ -12,19 +12,7 @@ Name of server, use for Telegram notification message
 
 3: Change IP through API (Optimized for SYM Host)
 
-4: Change IP for Cloudflare Warp (Wireguard Version)
-
-5: Change IP through API (No Further Retry)
-
-### DNSmasq
-0: Disable Changing DNSmasq Config
-
-1: Enable Changing DNSmasq Config
-
-### WGName (Only for Mode 4)
-Wireguard interface name
-
-### API (Only for Mode 2 and 5)
+### API (Only for Mode 2)
 Please edit before use
 
 ### SYMAPI (Only for Mode 3)
