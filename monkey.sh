@@ -4,8 +4,6 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 NAME="localhost"
 MODE=1
-DNSmasq=0
-WGName="wgcf"
 API="http://10.192.93.10/changeip/changeip.aspx"
 SYMAPI="https://sym.moe/ddns/ip.php?apikey=apikey&hostname=vmid"
 TG_BOT_TOKEN=1145141919:xxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -21,8 +19,8 @@ function Initialize {
     else
         echo "" > $SESSION
     fi
-    if (($MODE >= 1 && $MODE <= 5)); then
-        echo -e "Automatic Stream Unlock Monitor Monkey 2.1\n"
+    if (($MODE >= 1 && $MODE <= 3)); then
+        echo -e "Automatic Stream Unlock Monitor Monkey 2.1 Lite\n"
         Test
     else
         echo "Undefined Mode!"
@@ -31,17 +29,10 @@ function Initialize {
 }
 
 function Test {
-    if [[ $MODE -eq 4 ]]; then
-        echo "Detecting Netflix Unlock..."        
-        Netflix=$(curl --interface $WGName --user-agent "${UA_Browser}" -4 -fsL --write-out %{http_code} --output /dev/null --max-time 30 "https://www.netflix.com/title/70143836" 2>&1)
-        echo "Detecting Google Location..."
-        Google=$(curl --interface $WGName --user-agent "${UA_Browser}" -4 -sL --max-time 10 "https://www.youtube.com/red" | sed 's/,/\n/g' | grep "countryCode" | cut -d '"' -f4)
-    else
-        echo "Detecting Netflix Unlock..."        
-        Netflix=$(curl --user-agent "${UA_Browser}" -4 -fsL --write-out %{http_code} --output /dev/null --max-time 30 "https://www.netflix.com/title/70143836" 2>&1)
-        echo "Detecting Google Location..."
-        Google=$(curl --user-agent "${UA_Browser}" -4 -sL --max-time 10 "https://www.youtube.com/red" | sed 's/,/\n/g' | grep "countryCode" | cut -d '"' -f4)
-    fi
+    echo "Detecting Netflix Unlock..."        
+    Netflix=$(curl --user-agent "${UA_Browser}" -4 -fsL --write-out %{http_code} --output /dev/null --max-time 30 "https://www.netflix.com/title/70143836" 2>&1)
+    echo "Detecting Google Location..."
+    Google=$(curl --user-agent "${UA_Browser}" -4 -sL --max-time 10 "https://www.youtube.com/red" | sed 's/,/\n/g' | grep "countryCode" | cut -d '"' -f4)
     Analyse
 }
 
@@ -84,10 +75,8 @@ function Analyse {
             rm -rf /usr/local/bin/.netflix_session
             exit 0
         else
-            if [[ $DNSmasq -eq 1 ]]; then
-                ChangeDNS
-            fi
-            SendMsg
+            
+SendMsg
             echo "Changing IP successed. Exiting..."
             rm -rf /usr/local/bin/.netflix_session
             exit 0
@@ -115,22 +104,7 @@ function ChangeIP {
         curl $'$SYMAPI' -H 'Cookie: '$Cookie > /dev/null 2>&1
         sleep 10s
         Test
-    elif [[ $MODE -eq 4 ]]; then
-        wg-quick down $WGName >/dev/null 2>&1
-        sleep 5s
-        wg-quick up $WGName >/dev/null 2>&1
-        Test
-    elif [[ $MODE -eq 5 ]]; then
-        SendMsg
-        curl $API > /dev/null 2>&1
-        rm -rf /usr/local/bin/.netflix_session
-        exit 0
     fi
-}
-function ChangeDNS {
-    PresentIP=$(curl -4 -fsL http://ip.sb)
-    sed -ri "s/\/[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/\/$PresentIP/g" /etc/dnsmasq.d/custom_netflix.conf
-    systemctl restart dnsmasq
 }
 
 function SendMsg {
