@@ -3,9 +3,9 @@
 
 ## 特点
 - 7x24 全天候自动检测
-- 支持多种 IP 更换方式
-- 支持 Telegram 推送通知
-- 支持自动更换 DNS 解锁 IP
+- 支持多种 IP 更换方式（Lite 版不适用）
+- 支持 Telegram 推送通知（Lite 版不适用）
+- 支持自动更换 DNS 解锁 IP（Lite 版不适用）
 
 ## 如何使用
 1. 下载脚本到服务器，建议路径为 `/usr/local/bin/netflix.sh`
@@ -18,15 +18,15 @@
 
 ## 可配置选项
 
-### NAME（名称）
+### NAME（名称，Lite 版不适用）
 自定义服务器名称，Telegram 推送信息用
 
-### MODE（模式）
+### MODE（模式，Lite 版不适用，Lite 版本默认 DHCP）
 1: 以 DHCP 更换 IP
 
-2: 以 API 更换 IP
+2: 以 API 更换 IP（Lite 版不适用）
 
-3: 以 API 更换 IP（SYM Host 服务器专用）
+3: 以 API 更换 IP（SYM Host 服务器专用，Lite 版不适用）
 
 4: 为 Cloudflare Warp（Wireguard 版本）更换 IP（Lite 版不适用）
 
@@ -39,30 +39,30 @@
 
 2: 仅测试 Netflix
 
-### DNSmasq（DNS 解锁）
+### DNSmasq（DNS 解锁，Lite 版不适用）
 0: 禁用自动更新 DNSmasq 配置
 
 1: 启用自动更新 DNSmasq 配置
 
-### WGName（仅供模式 4 使用）
+### WGName（仅供模式 4 使用，Lite 版不适用）
 Cloudflare Warp Wireguard 版本的配置名
 
-### API（仅供模式 2/5 使用）
+### API（仅供模式 2/5 使用，Lite 版不适用）
 更换 IP API 地址，请在使用前配置
 
-### SYMAPI（仅供模式 2/5 使用）
+### SYMAPI（仅供模式 2/5 使用，Lite 版不适用）
 更换 IP API 地址，请在使用前配置
 
-### TG_BOT_TOKEN（Telegram 机器人密钥）
+### TG_BOT_TOKEN（Telegram 机器人密钥，Lite 版不适用）
 请使用 @BotFather 创建新机器人
 
-### TG_CHATID（Telegram 推送接收者 ID）
+### TG_CHATID（Telegram 推送接收者 ID，Lite 版不适用）
 您可以发送 /me 给 @luxiaoxun_bot 来获取个人 Telegram ID
 
 ## 最后更新
-版本：2.2（Lite 版仅提供 2.1 Lite）
+版本：2.2（Lite 版不持续维护）
 
-日期：2021年10月15日
+日期：2021年11月2日
 
 ## 联系
 Telegram: https://t.me/AS56040
