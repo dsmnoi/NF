@@ -57,6 +57,16 @@ function Analyse {
     fi
 }
 
+function ChangeIP {
+    if [[ $COUNT -eq 0 ]]; then
+        SendStartMsg
+    fi
+    let COUNT++
+    echo "尝试更换 IP 中，次数: $COUNT"
+    curl $API > /dev/null 2>&1
+    Test
+}
+
 function AfterCheck {
     if [[ $COUNT -eq 0 ]]; then
         echo "状态正常，退出中"
