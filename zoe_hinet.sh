@@ -3,7 +3,6 @@
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 NAME="zoecloudname"
-API="zoecloudapi"
 TG_BOT_TOKEN=zoecloudbottoken
 TG_CHATID=zoecloudbotchatid
 COUNT=0
@@ -58,16 +57,6 @@ function Analyse {
     fi
 }
 
-function ChangeIP {
-    if [[ $COUNT -eq 0 ]]; then
-        SendStartMsg
-    fi
-    let COUNT++
-    echo "尝试更换 IP 中，次数: $COUNT"
-    curl $API > /dev/null 2>&1
-    Test
-}
-
 function AfterCheck {
     if [[ $COUNT -eq 0 ]]; then
         echo "状态正常，退出中"
@@ -80,12 +69,12 @@ function AfterCheck {
 }
 
 function SendStartMsg {
-    TGMessage="ZoeCloud 定制版流媒体猴子%0A官网 https://zoecloud.cc%0A频道 https://t.me/zoecloud%0A群组 https://t.me/zoeclouds%0A%0A解锁已失效%0A服务器：$NAME"
+    TGMessage="检测到：$NAME Netflix非自制剧失效 请等待恢复"
     curl -s -X POST "https://api.telegram.org/bot$TG_BOT_TOKEN/sendMessage" -d chat_id=$TG_CHATID -d text="$TGMessage" -d parse_mode="HTML" >/dev/null 2>&1
 }
 
 function SendEndMsg {
-    TGMessage="ZoeCloud 定制版流媒体猴子%0A官网 https://zoecloud.cc%0A频道 https://t.me/zoecloud%0A群组 https://t.me/zoeclouds%0A%0A已恢复解锁%0A服务器：$NAME%0A尝试次数：$COUNT"
+    TGMessage="$NAME 已恢复Netflix非自制剧"
     curl -s -X POST "https://api.telegram.org/bot$TG_BOT_TOKEN/sendMessage" -d chat_id=$TG_CHATID -d text="$TGMessage" -d parse_mode="HTML" >/dev/null 2>&1
 }
 
