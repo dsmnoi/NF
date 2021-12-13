@@ -79,12 +79,12 @@ function AfterCheck {
 }
 
 function SendStartMsg {
-    TGMessage="检测到：$NAME Netflix非自制剧失效 请等待恢复"
+    TGMessage="检测 $NAME Netflix非自制剧失效 等待恢复"
     curl -s -X POST "https://api.telegram.org/bot$TG_BOT_TOKEN/sendMessage" -d chat_id=$TG_CHATID -d text="$TGMessage" -d parse_mode="HTML" >/dev/null 2>&1
 }
 
 function SendEndMsg {
-    TGMessage="$NAME 已恢复Netflix非自制剧"
+    TGMessage="检测 $NAME 已恢复Netflix非自制剧"
     curl -s -X POST "https://api.telegram.org/bot$TG_BOT_TOKEN/sendMessage" -d chat_id=$TG_CHATID -d text="$TGMessage" -d parse_mode="HTML" >/dev/null 2>&1
 }
 
